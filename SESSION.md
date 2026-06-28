@@ -1,0 +1,3 @@
+- The full Moebius UNet forward is trace-tested in Candle, but the scaffolding still keeps some duplicate first-block fields for granular parity tests; this should be consolidated before optimizing memory use.
+- The current paste-back worker helper uses a hard mask instead of the TypeScript port's 3px blurred mask blend; matching blur semantics still needs a browser-side or Rust image filter pass.
+- `cargo test` runs the full UNet parity suite by default; many tests exceeded 60 seconds locally, so the test layout needs a cheaper default path.

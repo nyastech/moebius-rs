@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Moebius</title>
+    <link data-trunk rel="rust" data-bin="moebius_app" />
+    <link data-trunk rel="copy-dir" href="public" />
+    <style>
+      :root {
+        color-scheme: light;
+        --page: #f6f7f4;
+        --panel: #ffffff;
+        --rail: #eef2ee;
+        --border: #cfd8d1;
+        --text: #18211d;
+        --muted: #617068;
+        --accent: #0f766e;
+        --accent-strong: #115e59;
+        background: var(--page);
+        color: var(--text);
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      }
+
+      * { box-sizing: border-box; }
+      html, body { min-height: 100%; margin: 0; background: var(--page); }
+      button, input { font: inherit; }
+      button {
+        min-height: 36px;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 7px 11px;
+        background: #fff;
+        color: var(--text);
+        cursor: pointer;
+      }
+      button.primary { border-color: var(--accent); background: var(--accent); color: #fff; font-weight: 700; }
+      button:disabled { cursor: not-allowed; opacity: 0.56; }
+      .shell { display: grid; grid-template-columns: 270px minmax(0, 1fr); min-height: 100vh; }
+      .sidebar { border-right: 1px solid var(--border); background: var(--rail); padding: 18px 14px; }
+      .brand { margin: 0 0 18px; font-size: 1.15rem; line-height: 1.1; }
+      .sidebar-copy, .status, .field label { color: var(--muted); font-size: 0.88rem; line-height: 1.4; }
+      .field { display: grid; gap: 7px; margin-top: 16px; }
+      .field-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+      .field input[type="range"], .field input[type="number"] { width: 100%; }
+      .actions { display: grid; gap: 8px; margin-top: 18px; }
+      .workspace { display: grid; grid-template-rows: auto 1fr auto; min-width: 0; min-height: 100vh; }
+      .topbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        padding: 12px 16px;
+        border-bottom: 1px solid var(--border);
+        background: #fbfcfa;
+      }
+      .status { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+      .progress-group { display: flex; align-items: center; gap: 10px; flex: 0 0 auto; }
+      .progress { width: min(340px, 38vw); height: 8px; overflow: hidden; border-radius: 999px; background: #dce5df; }
+      .bar { width: 0%; height: 100%; background: var(--accent); transition: width 120ms ease; }
+      .progress.running .bar { min-width: 28px; animation: working 900ms ease-in-out infinite alternate; }
+      .progress-value { width: 40px; color: var(--muted); font-size: 0.78rem; font-variant-numeric: tabular-nums; text-align: right; }
+      @keyframes working {
+        from { opacity: 0.55; transform: translateX(0); }
+        to { opacity: 1; transform: translateX(18px); }
+      }
+      .canvases {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(280px, 512px));
+        align-content: center;
+        justify-content: center;
+        gap: 18px;
+        padding: 18px;
+      }
+      .canvas-pane { display: grid; gap: 8px; min-width: 0; }
+      .canvas-label { color: #33413a; font-size: 0.9rem; font-weight: 800; }
+      .canvas-stack, canvas { width: 100%; aspect-ratio: 1; }
+      .canvas-stack { position: relative; border: 1px solid var(--border); background: #000; }
+      canvas { display: block; }
+      .canvas-stack canvas { position: absolute; inset: 0; }
+      .mask-layer { touch-action: none; }
+      .footer { display: flex; justify-content: flex-end; padding: 10px 16px; border-top: 1px solid var(--border); background: #fbfcfa; }
+      .download { color: var(--accent-strong); font-weight: 800; text-decoration: none; }
+      @media (max-width: 900px) {
+        .shell { grid-template-columns: 1fr; }
+        .sidebar { border-right: 0; border-bottom: 1px solid var(--border); }
+        .topbar { align-items: stretch; flex-direction: column; gap: 8px; }
+        .progress-group { width: 100%; }
+        .progress { width: 100%; }
+        .canvases { grid-template-columns: minmax(260px, 512px); }
+      }
+    </style>
+  </head>
+  <body></body>
+</html>
